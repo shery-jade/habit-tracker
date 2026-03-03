@@ -1,0 +1,156 @@
+SYSTEM SPECIFICATION
+
+Habit Tracker with Streak Calculation
+
+---
+
+# 1. Introduction
+
+## 1.1 Purpose
+
+The purpose of this system is to develop a web-based Habit Tracker application that allows users to create and manage daily habits. The system automatically calculates streaks to encourage consistency and productivity.
+
+## 1.2 Target Users
+
+The system is intended for:
+
+* Students
+* Individuals who want to improve daily productivity
+* Users who want to build consistent habits
+
+---
+
+# 2. Functional Requirements (Features)
+
+The system shall:
+
+1. Allow users to register an account.
+2. Allow users to log in and log out securely.
+3. Allow users to create new habits.
+4. Allow users to edit existing habits.
+5. Allow users to delete habits.
+6. Allow users to mark habits as completed daily.
+7. Automatically calculate the current streak.
+8. Reset the streak when a habit is missed.
+9. Display a dashboard showing:
+
+   * List of habits
+   * Completion status
+   * Current streak
+   * Longest streak
+10. Store and retrieve user data from the database.
+
+---
+
+# 3. Scope and Limitations
+
+## 3.1 Scope (Included)
+
+The system includes:
+
+* User authentication
+* Habit management
+* Streak calculation logic
+* REST API communication
+* Database storage
+* Basic responsive web interface
+
+## 3.2 Limitations (Excluded)
+
+The system does not include:
+
+* Mobile application version
+* Third-party integrations
+* Social media sharing
+* AI-based recommendations
+* Offline functionality
+
+---
+
+# 4. Technical Specifications
+
+---
+
+## 4.1 System Architecture
+
+The system follows a **Client-Server Architecture**:
+
+* Frontend handles user interface and interaction.
+* Backend handles business logic and database operations.
+* Communication is done through RESTful API endpoints using HTTP requests.
+
+---
+
+## 4.2 Backend
+
+The backend is developed using:
+
+* Framework: NestJS
+* Language: TypeScript
+* Runtime Environment: Node.js
+* API Type: REST API
+
+### Backend Responsibilities:
+
+* Handle user authentication
+* Process habit creation and updates
+* Calculate streak logic
+* Validate input data
+* Communicate with the database
+
+---
+
+## 4.3 Frontend
+
+The frontend is developed using:
+
+* Language: TypeScript
+* Structure: HTML
+* Styling: CSS
+
+### Frontend Responsibilities:
+
+* Display login and registration forms
+* Display habit dashboard
+* Send HTTP requests to backend API
+* Display habit data retrieved from server
+* Show streak information dynamically
+* Handle user interactions (button clicks, form submissions)
+
+The frontend communicates with the backend using fetch API to send GET, POST, PUT, and DELETE requests.
+
+---
+
+## 4.4 Database
+
+* Database: MySQL (or specify what you used)
+* ORM: TypeORM (if used)
+
+### Stored Data:
+
+* User information (username, password)
+* Habit details (name, description)
+* Completion history
+* Streak records
+
+---
+
+## 4.5 Development Tools
+
+* Version Control: Git
+* API Testing Tool: Postman
+* Code Editor: Visual Studio Code
+* Browser: Google Chrome
+
+---
+
+# 5. Non-Functional Requirements
+
+1. The system shall respond within 2 seconds under normal load.
+2. The system shall encrypt user passwords before storage.
+3. The system shall be modular and maintainable.
+4. The system shall handle invalid input gracefully.
+5. The system interface shall be user-friendly and simple.
+
+---
+
