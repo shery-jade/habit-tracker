@@ -90,21 +90,24 @@ export class HabitsService {
   }
 
   private calculateStreaks(habit: Habit): Habit {
-    const dates = habit.completedDates.map(d => new Date(d)).sort((a, b) => b.getTime() - a.getTime());
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
+    // Normalize dates and sort descending (newest first)
+    const normalizedDates = Array.from(new Set(habit.completedDates || []))
+      .map(d => d.trim())
+      .filter(Boolean)
+      .sort((a, b) => b.localeCompare(a));
 
+    const todayStr = new Date().toISOString().split('T')[0];
     let currentStreak = 0;
     let longestStreak = habit.longestStreak;
 
-    if (dates.length > 0 && dates[0].getTime() === today.getTime()) {
+    if (normalizedDates.length > 0 && normalizedDates[0] === todayStr) {
       currentStreak = 1;
-      let checkDate = new Date(today);
-      for (let i = 1; i < dates.length; i++) {
+      let checkDate = new Date(todayStr + 'T00:00:00Z');
+
+      for (let i = 1; i < normalizedDates.length; i++) {
         checkDate.setDate(checkDate.getDate() - 1);
-        if (dates[i].getTime() === checkDate.getTime()) {
+        const expectedDay = checkDate.toISOString().split('T')[0];
+        if (normalizedDates[i] === expectedDay) {
           currentStreak++;
         } else {
           break;
@@ -118,7 +121,7 @@ export class HabitsService {
 
     habit.currentStreak = currentStreak;
     habit.longestStreak = longestStreak;
-    habit.completedToday = dates.length > 0 && dates[0].getTime() === today.getTime();
+    habit.completedToday = normalizedDates.length > 0 && normalizedDates[0] === todayStr;
 
     return habit;
   }

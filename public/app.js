@@ -170,6 +170,11 @@ async function loadHabits() {
         if (res.ok) {
             const habits = await res.json();
             displayHabits(habits);
+            // If the user is viewing the analytics tab, refresh analytics data after loading habits
+            const analyticsTab = document.getElementById('analyticsTab');
+            if (analyticsTab && analyticsTab.style.display !== 'none') {
+                loadAnalytics();
+            }
         } else {
             showMessage('Failed to load habits');
         }
@@ -231,7 +236,9 @@ async function completeHabit(id) {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
-            loadHabits();
+            await loadHabits();
+            // Refresh analytics immediately when a habit is marked done
+            loadAnalytics();
         } else {
             showMessage('Failed to mark as done');
         }
