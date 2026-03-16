@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="message" style="display:none;"></div>
+    
+    <div id="auth">
+        <div class="auth-container">
+            <div id="login" class="auth-form">
+                <h2>Welcome to Habit Tracker</h2>
+                <p class="quote">"Small daily improvements over time lead to stunning results."</p>
+                <form id="loginForm">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p class="switch-form">Don't have an account? <a href="#" id="showRegister">Sign Up</a></p>
+            </div>
+            <div id="register" class="auth-form" style="display:none;">
+                <h2>Start Your Journey</h2>
+                <p class="quote">"You are what you repeatedly do. Excellence, then, is not an act, but a habit."</p>
+                <form id="registerForm">
+                    <input type="text" id="regUsername" placeholder="Choose a Username" required>
+                    <input type="password" id="regPassword" placeholder="Create a Password" required>
+                    <button type="submit">Create Account</button>
+                </form>
+                <p class="switch-form">Already have an account? <a href="#" id="showLogin">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+        <button id="logout" class="logout-btn">Logout</button>
+        <div class="dashboard-nav">
+            <button class="nav-btn active" id="navHabits" data-tab="habits">
+                <i class="fas fa-check-circle"></i> Habits
+            </button>
+            <button class="nav-btn" id="navAnalytics" data-tab="analytics">
+                <i class="fas fa-chart-bar"></i> Analytics
+            </button>
+            <button class="nav-btn" id="navHelp" data-tab="help">
+                <i class="fas fa-question-circle"></i> Help
+            </button>
+        </div>
+        
+        <header class="dashboard-header">
+            <div class="header-decorations">
+                <div class="leaf leaf-1"></div>
+                <div class="leaf leaf-2"></div>
+                <div class="leaf leaf-3"></div>
+            </div>
+            <h1 class="main-title">HABITS</h1>
+            <div class="header-icons">
+                <i class="fas fa-leaf"></i>
+                <i class="fas fa-dumbbell"></i>
+                <i class="fas fa-book"></i>
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <p class="header-quote">"Sow a thought, reap an action; sow an action, reap a habit; sow a habit, reap a character; sow a character, reap a destiny." <br><span>-Stephen R. Covey</span></p>
+        </header>
+
+        <div class="dashboard-container">
+            <div id="habitsTab">
+                <div class="entry-section">
+                    <div class="section-header">
+                        <i class="fas fa-plus"></i>
+                        <h3>ADD HABIT</h3>
+                    </div>
+                    <form id="addHabitForm" class="habit-form">
+                        <input type="text" id="habitName" placeholder="Habit name" required>
+                        <input type="text" id="habitDescription" placeholder="Description (optional)">
+                        <select id="habitIcon" class="habit-icon-select">
+                            <option value="leaf">🌿 Green</option>
+                            <option value="dumbbell">💪 Fitness</option>
+                            <option value="book">📚 Learning</option>
+                            <option value="heart">❤️ Health</option>
+                            <option value="pencil">✏️ Creative</option>
+                            <option value="moon">🌙 Sleep</option>
+                            <option value="water">💧 Hydration</option>
+                            <option value="utensils">🍽️ Nutrition</option>
+                        </select>
+                        <button type="submit">Add Habit</button>
+                    </form>
+
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button class="calendar-nav" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                            <h4 id="currentMonth">March 2026</h4>
+                            <button class="calendar-nav" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div id="calendar" class="calendar-grid"></div>
+                    </div>
+                </div>
+
+                <div class="habits-section">
+                    <div class="section-header">
+                        <i class="fas fa-list"></i>
+                        <h3>YOUR HABITS</h3>
+                    </div>
+                    <div id="habitsList" class="habits-grid"></div>
+                    <div id="emptyState" class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No habits yet. Create one to get started!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANALYTICS SECTION -->
+            <div class="analytics-section" id="analyticsTab">
+                <div class="section-header">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>YOUR ANALYTICS</h3>
+                </div>
+                <div class="analytics-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Habits</div>
+                        <div class="stat-value" id="totalHabits">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Today's Completion</div>
+                        <div class="stat-value" id="todayCompletion">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Current Week</div>
+                        <div class="stat-value" id="weekCompletion">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Best Streak</div>
+                        <div class="stat-value" id="bestStreak">0</div>
+                    </div>
+                </div>
+                
+                <div class="analytics-content">
+                    <div class="best-habits">
+                        <h4>🌟 Top Habits</h4>
+                        <div id="bestHabitsList" class="best-habits-list"></div>
+                    </div>
+                    
+                    <div class="weekly-chart">
+                        <h4>📊 This Week Overview</h4>
+                        <div id="weeklyChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HELP & FAQ SECTION -->
+            <div class="help-section" id="helpTab">
+                <div class="section-header">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>HELP & SUPPORT</h3>
+                </div>
+                
+                <div class="help-content">
+                    <div class="faq-container">
+                        <h4>❓ Frequently Asked Questions</h4>
+                        <div id="faqList" class="faq-list"></div>
+                    </div>
+                    
+                    <div class="contact-container">
+                        <h4>💬 Contact Support</h4>
+                        <form id="contactForm" class="contact-form">
+                            <input type="email" id="contactEmail" placeholder="Your email" required>
+                            <input type="text" id="contactSubject" placeholder="Subject" required>
+                            <textarea id="contactMessage" placeholder="Your message..." rows="5" required></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

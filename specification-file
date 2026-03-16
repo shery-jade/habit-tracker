@@ -124,7 +124,6 @@ The frontend communicates with the backend using fetch API to send GET, POST, PU
 ## 4.4 Database
 
 * Database: MySQL (or specify what you used)
-* ORM: TypeORM (if used)
 
 ### Stored Data:
 
@@ -154,3 +153,18 @@ The frontend communicates with the backend using fetch API to send GET, POST, PU
 
 ---
 
+Feature 1: Habit Analytics Dashboard
+Located in the Analytics tab, it displays:
+
+Total Habits count from your database
+Today's Completion % - tracks how many habits you marked done today
+This Week Completion % - calculates weekly completion rate
+Best Streak - shows your longest achievement
+Top 3 Habits list ranked by current streak
+7-Day Chart - visual bars showing daily completion history
+Feature 2: Help & FAQ Center
+Located in the Help tab, it includes:
+
+6 FAQ Items covering key questions about habit tracking, streaks, analytics, and more
+Expandable Accordion - click questions to toggle answers with smooth animations
+Contact Support Form - email, subject, and message fields to reach out
