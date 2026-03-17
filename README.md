@@ -1,4 +1,16 @@
-# Habit Tracker - Assignment Summary
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
+
+<p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+
+# Habit Tracker
+
+## Student Information
+- **Name:** GARCIA, SHERY JADE R.  
+- **Application:** Habit Tracker
+
+
 
 ## Features Added
 
@@ -33,7 +45,4 @@
 ### FAQ
 ![FAQ](public/screenshots/FAQ.png)
 
-## Challenges Encountered
-- Ensuring the analytics calculations reflected the correct date ranges (today + last 7 days) required careful date formatting.
-- Keeping the calendar widget compact and visually clean while retaining usability took iterative styling adjustments.
 
