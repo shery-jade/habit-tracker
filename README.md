@@ -16,6 +16,23 @@
 - Built Help/FAQ UI with toggle-able answers and contact form.
 - Kept consistent design theme (pink/sage glassmorphism) and responsive layout.
 
+## Screenshots
+
+### Home Page
+![Home Page](public/screenshots/main.png)
+
+### Add Habit
+![Add Habit](public/screenshots/addhabit.png)
+
+### Added Habit
+![Added Habit](public/screenshots/addedhabit.png)
+
+### Analytics
+![Analytics](public/screenshots/analytics.png)
+
+### FAQ
+![FAQ](public/screenshots/FAQ.png)
+
 ## Challenges Encountered
 - Ensuring the analytics calculations reflected the correct date ranges (today + last 7 days) required careful date formatting.
 - Keeping the calendar widget compact and visually clean while retaining usability took iterative styling adjustments.

@@ -413,10 +413,9 @@ function displayAnalytics(habits) {
     const bestStreak = habits.length > 0 ? Math.max(...habits.map(h => h.longestStreak)) : 0;
     document.getElementById('bestStreak').textContent = bestStreak;
     
-    // Top 3 habits
+    // Top habits
     const topHabits = [...habits]
-        .sort((a, b) => b.currentStreak - a.currentStreak)
-        .slice(0, 3);
+        .sort((a, b) => b.currentStreak - a.currentStreak);
     
     const bestList = document.getElementById('bestHabitsList');
     bestList.innerHTML = '';
