@@ -13,54 +13,46 @@ export class HabitsService {
 
   async findAll(user: User): Promise<any[]> {
     const habits = await this.habitsRepository.find({ where: { user } });
-    return habits.map(habit => {
-      const calculated = this.calculateStreaks(habit);
-      return {
-        id: calculated.id,
-        name: calculated.name,
-        description: calculated.description,
-        currentStreak: calculated.currentStreak,
-        longestStreak: calculated.longestStreak,
-        completedToday: calculated.completedToday,
-      };
-    });
+    return habits.map((habit) => this.serializeHabit(this.calculateStreaks(habit)));
   }
 
-  async create(user: User, name: string, description?: string): Promise<any> {
+  async create(
+    user: User,
+    name: string,
+    description?: string,
+    icon = 'leaf',
+    timerMinutes = 0,
+  ): Promise<any> {
     const habit = this.habitsRepository.create({
       name,
       description,
+      icon,
+      timerMinutes,
       completedDates: [],
       currentStreak: 0,
       longestStreak: 0,
       user,
     });
     const saved = await this.habitsRepository.save(habit);
-    return {
-      id: saved.id,
-      name: saved.name,
-      description: saved.description,
-      currentStreak: 0,
-      longestStreak: 0,
-      completedToday: false,
-    };
+    return this.serializeHabit(this.calculateStreaks(saved));
   }
 
-  async update(id: number, user: User, name?: string, description?: string): Promise<any> {
+  async update(
+    id: number,
+    user: User,
+    name?: string,
+    description?: string,
+    icon?: string,
+    timerMinutes?: number,
+  ): Promise<any> {
     const habit = await this.habitsRepository.findOne({ where: { id, user } });
     if (!habit) throw new Error('Habit not found');
     if (name) habit.name = name;
     if (description !== undefined) habit.description = description;
+    if (icon !== undefined) habit.icon = icon;
+    if (timerMinutes !== undefined) habit.timerMinutes = timerMinutes;
     const saved = await this.habitsRepository.save(habit);
-    const calculated = this.calculateStreaks(saved);
-    return {
-      id: calculated.id,
-      name: calculated.name,
-      description: calculated.description,
-      currentStreak: calculated.currentStreak,
-      longestStreak: calculated.longestStreak,
-      completedToday: calculated.completedToday,
-    };
+    return this.serializeHabit(this.calculateStreaks(saved));
   }
 
   async delete(id: number, user: User): Promise<void> {
@@ -78,14 +70,20 @@ export class HabitsService {
       habit.completedDates.sort();
     }
     const saved = await this.habitsRepository.save(habit);
-    const calculated = this.calculateStreaks(saved);
+    return this.serializeHabit(this.calculateStreaks(saved));
+  }
+
+  private serializeHabit(habit: Habit) {
     return {
-      id: calculated.id,
-      name: calculated.name,
-      description: calculated.description,
-      currentStreak: calculated.currentStreak,
-      longestStreak: calculated.longestStreak,
-      completedToday: calculated.completedToday,
+      id: habit.id,
+      name: habit.name,
+      description: habit.description,
+      icon: habit.icon,
+      timerMinutes: habit.timerMinutes,
+      completedDates: habit.completedDates || [],
+      currentStreak: habit.currentStreak,
+      longestStreak: habit.longestStreak,
+      completedToday: habit.completedToday,
     };
   }
 

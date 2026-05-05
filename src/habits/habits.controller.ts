@@ -13,13 +13,35 @@ export class HabitsController {
   }
 
   @Post()
-  create(@Request() req, @Body() body: { name: string; description?: string }) {
-    return this.habitsService.create(req.user, body.name, body.description);
+  create(
+    @Request() req,
+    @Body()
+    body: { name: string; description?: string; icon?: string; timerMinutes?: number },
+  ) {
+    return this.habitsService.create(
+      req.user,
+      body.name,
+      body.description,
+      body.icon,
+      body.timerMinutes,
+    );
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Request() req, @Body() body: { name?: string; description?: string }) {
-    return this.habitsService.update(+id, req.user, body.name, body.description);
+  update(
+    @Param('id') id: number,
+    @Request() req,
+    @Body()
+    body: { name?: string; description?: string; icon?: string; timerMinutes?: number },
+  ) {
+    return this.habitsService.update(
+      +id,
+      req.user,
+      body.name,
+      body.description,
+      body.icon,
+      body.timerMinutes,
+    );
   }
 
   @Delete(':id')

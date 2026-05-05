@@ -12,6 +12,12 @@ export class Habit {
   @Column({ nullable: true })
   description: string;
 
+  @Column({ default: 'leaf' })
+  icon: string;
+
+  @Column({ default: 0 })
+  timerMinutes: number;
+
   @Column('simple-array')
   completedDates: string[]; // ISO dates
 
